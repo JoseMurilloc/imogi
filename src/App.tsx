@@ -1,12 +1,27 @@
-import { GlobalStyle } from './styles/GlobalStyle'
+import { FormEvent, useEffect, useState } from 'react';
 
-import { Greetings } from './components/Greetings'
+import emojiList from './data/emojiList';
+
+import { SearchInput } from './components/SearchInput';
+import { GlobalStyle } from './styles/GlobalStyle';
+
+import * as S from './styles';
 
 export function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = (event: FormEvent<HTMLInputElement>) => {
+    setSearchTerm(event.currentTarget.value);
+  };
+
   return (
     <>
       <GlobalStyle />
-      <Greetings />
+      <S.Container>
+        <S.DraggableTaskBar />
+
+        <SearchInput handleSearch={handleSearch} />
+      </S.Container>
     </>
-  )
+  );
 }
