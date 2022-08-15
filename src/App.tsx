@@ -1,27 +1,29 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
-import emojiList from './data/emojiList';
+import { AppProvider } from './hooks';
 
-import { SearchInput } from './components/SearchInput';
 import { GlobalStyle } from './styles/GlobalStyle';
+
+import { EmojisCategories } from './components/EmojisCategories';
+import { EmojisList } from './pages/EmojisList';
 
 import * as S from './styles';
 
 export function App() {
-  const [searchTerm, setSearchTerm] = useState('');
-
-  const handleSearch = (event: FormEvent<HTMLInputElement>) => {
-    setSearchTerm(event.currentTarget.value);
-  };
-
   return (
-    <>
-      <GlobalStyle />
-      <S.Container>
+    <Router>
+      <AppProvider>
+        <GlobalStyle />
         <S.DraggableTaskBar />
 
-        <SearchInput handleSearch={handleSearch} />
-      </S.Container>
-    </>
+        <S.Container>
+          <Routes>
+            <Route path="/:categorySlug" element={<EmojisList />} />
+            <Route path="/emojis/:categorySlug" element={<EmojisList />} />
+          </Routes>
+          <EmojisCategories />
+        </S.Container>
+      </AppProvider>
+    </Router>
   );
 }
