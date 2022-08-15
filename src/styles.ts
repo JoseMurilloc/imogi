@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.main`
   width: 100%;
-  height: 100%;
+  height: 100vh;
 
-  padding: 0 2rem 2rem;
-  margin-top: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const DraggableTaskBar = styled.div`
