@@ -1,4 +1,4 @@
-import { Emoji } from './Emoji';
+import Emoji from './Emoji';
 import { SearchInput } from './SearchInput';
 import { Toast } from './Toast';
 
