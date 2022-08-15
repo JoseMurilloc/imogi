@@ -8,6 +8,9 @@ export const Container = styled.div`
 
   display: flex;
   align-items: center;
+
+  margin-top: 3.2rem;
+  padding: 0 2rem;
 `;
 
 export const Input = styled.input`
