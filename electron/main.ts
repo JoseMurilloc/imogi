@@ -13,16 +13,21 @@ declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 function createWindow() {
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
-    width: 500,
-    height: 600,
+    width: 350,
+    height: 400,
     backgroundColor: '#1B1D24',
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      defaultFontFamily: {
+        standard: 'Ubuntu',
+      },
     },
     frame: false,
   });
+
+  mainWindow.setAlwaysOnTop(true);
 
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
