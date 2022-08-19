@@ -13,7 +13,7 @@ interface IMatchRoute {
   };
 }
 
-export const CategoryIcon = ({ categorySlug }: ICategoryIconProps) => {
+export const CategoryButton = ({ categorySlug }: ICategoryIconProps) => {
   const { pathname } = useLocation();
   let routeSlug = 'smileys-emotion';
 
