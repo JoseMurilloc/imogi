@@ -4,7 +4,7 @@ import { AppProvider } from './hooks';
 
 import { GlobalStyle } from './styles/GlobalStyle';
 
-import { EmojisCategories } from './components/EmojisCategories';
+import { CategoriesTabNavigation } from './components/CategoriesTabNavigation';
 import { EmojisList } from './pages/EmojisList';
 
 import * as S from './styles';
@@ -21,7 +21,7 @@ export function App() {
             <Route path="/" element={<EmojisList />} />
             <Route path="/emojis/:categorySlug" element={<EmojisList />} />
           </Routes>
-          <EmojisCategories />
+          <CategoriesTabNavigation />
         </S.Container>
       </AppProvider>
     </Router>

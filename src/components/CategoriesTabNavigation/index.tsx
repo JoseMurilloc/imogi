@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { Emoji } from '../../services/emoji';
-import { CategoryIcon } from '../CategoryIcon';
+import { CategoryButton } from '../CategoryButton';
 
 import * as S from './styles';
 
@@ -9,7 +9,7 @@ interface ICategory {
   slug: string;
 }
 
-export const EmojisCategories = () => {
+export const CategoriesTabNavigation = () => {
   const [categories, setCategories] = useState<ICategory[]>([
     {
       slug: 'smileys-emotion',
@@ -60,7 +60,7 @@ export const EmojisCategories = () => {
   return (
     <S.Container>
       {categories.map(category => (
-        <CategoryIcon key={category.slug} categorySlug={category.slug} />
+        <CategoryButton key={category.slug} categorySlug={category.slug} />
       ))}
     </S.Container>
   );
