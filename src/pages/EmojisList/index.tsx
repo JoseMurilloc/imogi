@@ -14,9 +14,8 @@ interface IEmoji {
 
 export const EmojisList = () => {
   const [emojiList, setEmojiList] = useState<IEmoji[]>([]);
+  const [filteredEmojiList, setFilteredEmojiList] = useState<IEmoji[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
-
-  const filteredEmojis = [];
 
   const { categorySlug } = useParams();
 
@@ -32,18 +31,18 @@ export const EmojisList = () => {
     setEmojiList(response.data);
   }, [categorySlug]);
 
-  const searchEmojis = useCallback(async () => {
-    // if (!searchTerm) {
-    //   return;
-    // }
+  const searchEmojis = useCallback(async (searchTerm: string) => {
+    if (!searchTerm) {
+      return;
+    }
 
-    // const response = await Emoji.searchEmojis(searchTerm);
+    const response = await Emoji.searchEmojis(searchTerm);
 
-    // if (!response.ok) {
-    //   return;
-    // }
+    if (!response.ok) {
+      return;
+    }
 
-    console.log(searchTerm);
+    setFilteredEmojiList(response.data);
   }, []);
 
   useEffect(() => {
@@ -51,20 +50,17 @@ export const EmojisList = () => {
   }, [getEmojiList]);
 
   useEffect(() => {
-    const keyDownHandler = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
+    if (searchTerm === '') {
+      setFilteredEmojiList([]);
+      return;
+    }
 
-        console.log(searchTerm);
+    const delayInSearch = setTimeout(() => {
+      searchEmojis(searchTerm);
+    }, 800);
 
-        searchEmojis();
-      }
-    };
-
-    document.addEventListener('keydown', keyDownHandler);
-
-    return () => document.removeEventListener('keydown', keyDownHandler);
-  }, [searchEmojis]);
+    return () => clearTimeout(delayInSearch);
+  }, [searchEmojis, searchTerm]);
 
   return (
     <S.Container>
@@ -75,9 +71,13 @@ export const EmojisList = () => {
       />
 
       <S.EmojisContainer>
-        {emojiList.map(emoji => (
-          <EmojiComponent key={emoji.slug} codePoint={emoji.codePoint} />
-        ))}
+        {searchTerm.length > 0
+          ? filteredEmojiList.map(emoji => (
+              <EmojiComponent key={emoji.slug} codePoint={emoji.codePoint} />
+            ))
+          : emojiList.map(emoji => (
+              <EmojiComponent key={emoji.slug} codePoint={emoji.codePoint} />
+            ))}
       </S.EmojisContainer>
     </S.Container>
   );
