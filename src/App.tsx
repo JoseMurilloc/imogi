@@ -18,7 +18,7 @@ export function App() {
 
         <S.Container>
           <Routes>
-            <Route path="/:categorySlug" element={<EmojisList />} />
+            <Route path="/" element={<EmojisList />} />
             <Route path="/emojis/:categorySlug" element={<EmojisList />} />
           </Routes>
           <EmojisCategories />
