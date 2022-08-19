@@ -35,7 +35,7 @@ export const Emoji = {
 
   searchEmojis: async (searchTerm: string) => {
     try {
-      const response = await api.get(`/emojis/?search=${searchTerm}`);
+      const response = await api.get(`/emojis?search=${searchTerm}`);
 
       return {
         data: response.data,
