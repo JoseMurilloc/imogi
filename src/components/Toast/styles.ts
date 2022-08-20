@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.output`
   position: absolute;
-  bottom: 5%;
+  bottom: 11%;
   left: 50%;
   transform: translate(-50%, 0);
 
-  background-color: rgba(160, 38, 235, 0.5);
+  background-color: #a026eb;
 
   padding: 0.3rem 0.6rem;
 
