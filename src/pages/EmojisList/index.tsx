@@ -99,12 +99,12 @@ export const EmojisList = () => {
       {pageStatus === 'resolved' && (
         <S.EmojisContainer
           formattedToRenderOneLine={
-            filteredEmojiList.length > 0 && filteredEmojiList.length <= 7
+            filteredEmojiList?.length > 0 && filteredEmojiList?.length <= 7
           }
         >
           {searchTerm.length > 0 ? (
             <ul>
-              {filteredEmojiList.map(emoji => (
+              {filteredEmojiList?.map(emoji => (
                 <li key={emoji.slug}>
                   <EmojiComponent codePoint={emoji.codePoint} />
                 </li>
@@ -120,6 +120,11 @@ export const EmojisList = () => {
             </ul>
           )}
         </S.EmojisContainer>
+      )}
+      {pageStatus === 'error' && (
+        <S.ErrorContainer>
+          <span>😔 Failed to load, you can try again later!</span>
+        </S.ErrorContainer>
       )}
     </S.Container>
   );

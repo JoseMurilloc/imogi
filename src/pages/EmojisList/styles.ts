@@ -10,6 +10,7 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 export const EmojisContainer = styled.div<IEmojisContainerProps>`
@@ -28,5 +29,16 @@ export const EmojisContainer = styled.div<IEmojisContainerProps>`
     align-items: center;
     justify-content: ${({ formattedToRenderOneLine }) =>
       formattedToRenderOneLine ? 'flex-start' : 'space-between'};
+  }
+`;
+
+export const ErrorContainer = styled.div`
+  margin-top: 10rem;
+  width: 70%;
+  text-align: center;
+
+  span {
+    font-size: 1.4rem;
+    color: #fff;
   }
 `;
