@@ -14,7 +14,7 @@ export const Container = styled.input`
 
   transition: background-color 400ms;
 
-  font-size: 2.2rem;
+  font-size: 2.4rem;
 
   &:hover {
     background-color: #4a5159;
