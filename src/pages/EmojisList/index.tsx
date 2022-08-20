@@ -1,8 +1,11 @@
-import { FormEvent, useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { Emoji } from '../../services/emoji';
 import { Emoji as EmojiComponent, SearchInput } from '../../components';
+
+import loadingAnimation from '../../lotties/loading.json';
+import Lottie from 'react-lottie';
 
 import * as S from './styles';
 
@@ -12,7 +15,10 @@ interface IEmoji {
   group: string;
 }
 
+type TPageStatus = 'idle' | 'loading' | 'resolved' | 'error';
+
 export const EmojisList = () => {
+  const [pageStatus, setPageStatus] = useState<TPageStatus>('idle');
   const [emojiList, setEmojiList] = useState<IEmoji[]>([]);
   const [filteredEmojiList, setFilteredEmojiList] = useState<IEmoji[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,18 +26,23 @@ export const EmojisList = () => {
   const { categorySlug } = useParams();
 
   const getEmojiList = useCallback(async () => {
+    setPageStatus('loading');
+
     const response = await Emoji.getEmojiFromCategory(
       categorySlug ?? 'smileys-emotion'
     );
 
     if (!response.ok) {
+      setPageStatus('error');
       return;
     }
 
     setEmojiList(response.data);
+    setPageStatus('resolved');
   }, [categorySlug]);
 
   const searchEmojis = useCallback(async (searchTerm: string) => {
+    setPageStatus('loading');
     if (!searchTerm) {
       return;
     }
@@ -39,10 +50,12 @@ export const EmojisList = () => {
     const response = await Emoji.searchEmojis(searchTerm);
 
     if (!response.ok) {
+      setPageStatus('error');
       return;
     }
 
     setFilteredEmojiList(response.data);
+    setPageStatus('resolved');
   }, []);
 
   useEffect(() => {
@@ -70,15 +83,44 @@ export const EmojisList = () => {
         value={searchTerm}
       />
 
-      <S.EmojisContainer>
-        {searchTerm.length > 0
-          ? filteredEmojiList.map(emoji => (
-              <EmojiComponent key={emoji.slug} codePoint={emoji.codePoint} />
-            ))
-          : emojiList.map(emoji => (
-              <EmojiComponent key={emoji.slug} codePoint={emoji.codePoint} />
-            ))}
-      </S.EmojisContainer>
+      {pageStatus === 'loading' && (
+        <div>
+          <Lottie
+            options={{
+              loop: true,
+              autoplay: true,
+              animationData: loadingAnimation,
+            }}
+            width={80}
+            height={80}
+          />
+        </div>
+      )}
+      {pageStatus === 'resolved' && (
+        <S.EmojisContainer
+          formattedToRenderOneLine={
+            filteredEmojiList.length > 0 && filteredEmojiList.length <= 7
+          }
+        >
+          {searchTerm.length > 0 ? (
+            <ul>
+              {filteredEmojiList.map(emoji => (
+                <li key={emoji.slug}>
+                  <EmojiComponent codePoint={emoji.codePoint} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ul>
+              {emojiList.map(emoji => (
+                <li key={emoji.slug}>
+                  <EmojiComponent codePoint={emoji.codePoint} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </S.EmojisContainer>
+      )}
     </S.Container>
   );
 };
