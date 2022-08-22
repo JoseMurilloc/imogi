@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.input`
-  width: 4rem;
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,6 +13,7 @@ export const Container = styled.input`
   transition: background-color 400ms;
 
   font-size: 2.4rem;
+  padding: 0.2rem;
 
   &:hover {
     background-color: #4a5159;
