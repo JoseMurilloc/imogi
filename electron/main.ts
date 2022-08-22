@@ -55,7 +55,10 @@ async function registerListeners() {
 }
 
 app
-  .on('ready', createWindow)
+  .on('ready', () => {
+    createWindow();
+    mainWindow?.setSkipTaskbar(true);
+  })
   .whenReady()
   .then(registerListeners)
   .catch(e => console.error(e));
