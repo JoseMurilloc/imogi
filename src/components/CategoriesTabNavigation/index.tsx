@@ -10,38 +10,7 @@ interface ICategory {
 }
 
 export const CategoriesTabNavigation = () => {
-  const [categories, setCategories] = useState<ICategory[]>([
-    {
-      slug: 'smileys-emotion',
-    },
-    {
-      slug: 'people-body',
-    },
-    {
-      slug: 'animals-nature',
-    },
-    {
-      slug: 'food-drink',
-    },
-    {
-      slug: 'component',
-    },
-    {
-      slug: 'travel-places',
-    },
-    {
-      slug: 'activities',
-    },
-    {
-      slug: 'objects',
-    },
-    {
-      slug: 'symbols',
-    },
-    {
-      slug: 'flags',
-    },
-  ]);
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
   const getEmojiCategories = useCallback(async () => {
     const response = await Emoji.getCategories();
