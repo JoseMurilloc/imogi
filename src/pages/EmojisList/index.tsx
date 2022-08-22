@@ -96,12 +96,9 @@ export const EmojisList = () => {
           />
         </div>
       )}
+
       {pageStatus === 'resolved' && (
-        <S.EmojisContainer
-          formattedToRenderOneLine={
-            filteredEmojiList?.length > 0 && filteredEmojiList?.length <= 7
-          }
-        >
+        <S.EmojisContainer>
           {searchTerm.length > 0 ? (
             <ul>
               {filteredEmojiList?.map(emoji => (
@@ -121,6 +118,7 @@ export const EmojisList = () => {
           )}
         </S.EmojisContainer>
       )}
+
       {pageStatus === 'error' && (
         <S.ErrorContainer>
           <span>😔 Failed to load, you can try again later!</span>
