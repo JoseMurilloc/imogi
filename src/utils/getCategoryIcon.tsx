@@ -12,6 +12,8 @@ export const getCategoryIcon = (
   const iconProps = {
     color,
     size: 18,
+    'data-testid': 'categoryIcon',
+    id: categorySlug,
   };
 
   const categoriesIcons: any = {

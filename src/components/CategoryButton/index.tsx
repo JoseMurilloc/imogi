@@ -31,7 +31,7 @@ export const CategoryButton = ({ categorySlug }: ICategoryIconProps) => {
   );
 
   return Icon ? (
-    <S.Container>
+    <S.Container data-testid="categoryButton">
       <Link to={`/emojis/${categorySlug}`}>{Icon}</Link>
     </S.Container>
   ) : null;
