@@ -23,6 +23,7 @@ const Emoji = ({ codePoint }: IEmojiProps) => {
       onClick={handleCopyEmojiToClipBoard}
       type="button"
       value={String.fromCodePoint(parseInt(codePoint, 16))}
+      data-testid="emojiInput"
     />
   );
 };
