@@ -6,7 +6,7 @@ import { CategoryButton } from '.';
 import { categoryMock } from '../../../tests/__mocks__/categoryMock';
 
 describe('CategoryButton Component', () => {
-  it('should render a correctly icon', async () => {
+  it('should render a correctly icon', () => {
     const [category] = categoryMock;
 
     const { getByTestId } = render(
