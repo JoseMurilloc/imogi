@@ -1,18 +1,15 @@
 import { app, BrowserWindow, ipcMain, globalShortcut } from 'electron';
 
+import * as path from 'path';
+
 let mainWindow: BrowserWindow | null;
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: string;
 declare const MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY: string;
 
-// const assetsPath =
-//   process.env.NODE_ENV === 'production'
-//     ? process.resourcesPath
-//     : app.getAppPath()
-
 function createWindow() {
   mainWindow = new BrowserWindow({
-    // icon: path.join(assetsPath, 'assets', 'icon.png'),
+    icon: path.join(__dirname, 'assets/imogicon.icns'),
     width: 350,
     height: 400,
     backgroundColor: '#1B1D24',
