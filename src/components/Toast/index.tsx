@@ -19,7 +19,7 @@ export const Toast = ({ message }: IToastProps) => {
   }, []);
 
   return (
-    <S.Container>
+    <S.Container data-testid="toast">
       <span>{message}</span>
     </S.Container>
   );
